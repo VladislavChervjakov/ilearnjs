@@ -387,4 +387,46 @@ function topSalary(salaries) {
     return `${maxName} ${max}`;
 }
 
-alert(topSalary(salaries));
+//alert(topSalary(salaries));
+
+//let date = new Date(2020, 3, 19);
+
+// function getWeekDay(date) {
+//     let days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+
+//     return days[date.getDay()];
+// }
+
+// function getLocalDay(date) {
+//     let day = date.getDay();
+//     if(day == 0) day = 7;
+//     return day;
+// }
+
+// alert(getLocalDay(date));
+
+//alert(getWeekDay(date));
+
+//alert(date);
+
+// let date = new Date();
+
+// function getDateAgo(date, days) {
+//     let dateCopy = new Date(date);
+
+//     dateCopy.setDate(date.getDate() - days);
+//     return dateCopy.getDate();
+// }
+
+// alert(getDateAgo(date, 1));
+
+// function getLastDayOfMonth(year, month) {
+//     let date = new Date(year, month + 1, 0);
+//     return date; 
+// }
+
+// alert(getLastDayOfMonth(2012, 2));
+
+function getSecondsToday() {
+    
+}

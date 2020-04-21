@@ -333,11 +333,11 @@ function compareReverse(a,b) {
 
 // alert(aclean(arr));
 
-let salaries = {
-    "John": 100,
-    "Pete": 300,
-    "Mary": 250
-};
+// let salaries = {
+//     "John": 100,
+//     "Pete": 300,
+//     "Mary": 250
+// };
 
 // function sumSalaries(salaries) {
 //     let sum = 0;
@@ -350,13 +350,41 @@ let salaries = {
 
 // alert(sumSalaries(salaries));
 
-let user = {
-    name: 'John',
-    age: 30
-  };
+// let user = {
+//     name: 'John',
+//     age: 30
+//   };
 
-function count(obj) {
-    return Object.keys(obj).length;
+// function count(obj) {
+//     return Object.keys(obj).length;
+// }
+
+//alert(count(user));
+
+let user = {name: "John", years: 30};
+
+let {name, years: age, isAdmin = false} = user
+
+let salaries = {
+    "John": 100, 
+    "Pete": 300,
+    "Mary": 250
 }
 
-alert(count(user));
+function topSalary(salaries) {
+    let max = 0;
+    let maxName = null;
+
+    if(Object.keys(salaries).length === 0) return null;
+
+    for([key, value] of Object.entries(salaries)) {
+        if (max < value) {
+            max = value;
+            maxName = key;
+        }
+    }
+
+    return `${maxName} ${max}`;
+}
+
+alert(topSalary(salaries));

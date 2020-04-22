@@ -634,3 +634,46 @@ let list = {
 //   }
   
 //   printReverseList(list);
+
+// function sum(a) {
+//     return function(b) {
+//         return a + b;
+//     }
+// }
+
+// alert(sum(1)(2));
+
+function inBetween(a, b) {
+    return function(x) {
+        return x >= a && x <= b
+    }
+}
+
+function inArray(arr) {
+    return function(x) {
+        return arr.includes(x);
+    }
+}
+
+function byField(name) {
+    return function(a, b) {
+        if(a[name] > b[name]) return 1;
+        return -1;
+    }
+}
+
+let users = [
+    { name: "John", age: 20, surname: "Johnson" },
+    { name: "Pete", age: 18, surname: "Peterson" },
+    { name: "Ann", age: 19, surname: "Hathaway" }
+  ];
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+
+//alert( arr.filter(inArray([3, 6, 12])) ); 
+
+let sortedUsers = users.sort(byField('age'));
+
+for(let value of sortedUsers) {
+    alert(value.name);
+}

@@ -450,39 +450,66 @@ function topSalary(salaries) {
 
 // alert(getSecondsToTomorrow());
 
-function formatDate(date) {
-    let diff = new Date - date;
+// function formatDate(date) {
+//     let diff = new Date - date;
 
-    if (diff < 1000) {
-        return "right now";
-    }
+//     if (diff < 1000) {
+//         return "right now";
+//     }
 
-    if (diff < 60000) {
-        return Math.round(diff / 1000) + " sec. ago";
-    }
+//     if (diff < 60000) {
+//         return Math.round(diff / 1000) + " sec. ago";
+//     }
 
 
-    if (diff / 60000 < 60) {
-        return Math.round(diff / 60000) + " min. ago";
-    }
+//     if (diff / 60000 < 60) {
+//         return Math.round(diff / 60000) + " min. ago";
+//     }
     
-    let d = date;
+//     let d = date;
 
-    d = [
-        '0' + d.getDate(),
-        '0' + (d.getMonth() + 1),
-        '' + d.getFullYear(),
-        '0' + d.getHours(),
-        '0' + d.getMinutes()
-    ].map(component => component.slice(-2));
+//     d = [
+//         '0' + d.getDate(),
+//         '0' + (d.getMonth() + 1),
+//         '' + d.getFullYear(),
+//         '0' + d.getHours(),
+//         '0' + d.getMinutes()
+//     ].map(component => component.slice(-2));
 
-    return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+//     return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+
+// }
+
+// alert( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
+
+// alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
+
+// alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
+// alert( formatDate(new Date(new Date - 86400 * 1000)) );
+
+
+let userV = {
+    name: "Василий Иванович",
+    age: 35
+}
+
+let jsonUser = JSON.stringify(userV);
+
+//alert(jsonUser);
+
+let room = {
+    number: 23
+};
+
+let meetup = {
+    title: "Совещание",
+    occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
+    place: room
 
 }
 
-alert( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
-
-alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
-
-alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
-alert( formatDate(new Date(new Date - 86400 * 1000)) );
+room.occupiedBy = meetup;
+meetup.self = meetup;
+alert(JSON.stringify(meetup, function replacer(key, value) {
+    return (key !== "" && value === meetup) ? undefined : value;
+}));

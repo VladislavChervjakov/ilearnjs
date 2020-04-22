@@ -488,28 +488,149 @@ function topSalary(salaries) {
 // alert( formatDate(new Date(new Date - 86400 * 1000)) );
 
 
-let userV = {
-    name: "Василий Иванович",
-    age: 35
-}
+// let userV = {
+//     name: "Василий Иванович",
+//     age: 35
+// }
 
-let jsonUser = JSON.stringify(userV);
+// let jsonUser = JSON.stringify(userV);
 
-//alert(jsonUser);
+// //alert(jsonUser);
 
-let room = {
-    number: 23
-};
+// let room = {
+//     number: 23
+// };
 
-let meetup = {
-    title: "Совещание",
-    occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
-    place: room
+// let meetup = {
+//     title: "Совещание",
+//     occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
+//     place: room
 
-}
+// }
 
-room.occupiedBy = meetup;
-meetup.self = meetup;
-alert(JSON.stringify(meetup, function replacer(key, value) {
-    return (key !== "" && value === meetup) ? undefined : value;
-}));
+// room.occupiedBy = meetup;
+// meetup.self = meetup;
+// alert(JSON.stringify(meetup, function replacer(key, value) {
+//     return (key !== "" && value === meetup) ? undefined : value;
+// }));
+
+
+// with loop
+// function sumTo(n) {
+//     let sum = 0;
+//     for(i = 1; i <= n; i++) {
+//         sum += i
+//     }
+    
+//     return sum;
+// }
+
+
+// with rcursion
+// function sumTo(n) {
+//     if (n === 1) return n;
+    
+//     return n + sumTo(n - 1);
+// }
+
+// alert(sumTo(5));
+
+// function factorial(n) {
+//     if (n === 1) return n;
+
+//     return n * factorial(n - 1);
+// }
+
+// alert(factorial(5));
+
+// function fib(n) {
+//     if (n <= 1) return n;
+    
+//     return fib(n - 1) + fib(n - 2);
+// }
+
+//alert(fib(5));
+
+// with loop fibonacci
+
+// function fib(n) {
+//     let a = 1;
+//     let b = 1;
+//     for(let i = 3; i <= n; i++) {
+//         let c = a + b;
+//         a = b;
+//         b = c;
+//     }
+//     return b;
+// }
+
+// alert( fib(3) );
+// alert( fib(7) );
+// alert( fib(77) )
+
+let list = {
+    value: 1,
+    next: {
+      value: 2,
+      next: {
+        value: 3,
+        next: {
+          value: 4,
+          next: null
+        }
+      }
+    }
+  };
+
+  
+//   function printList(list) {
+
+//         alert(list.value);
+//         if(list.next) printList(list.next);
+//   }
+
+
+// with loop
+
+// function printList(list) {
+//     let tmp = list;
+
+//     while(tmp) {
+//       alert(tmp.value);
+//       tmp = tmp.next;
+//     }
+// }
+
+//   printList(list);
+
+// with loop
+
+// function printReverseList(list) {
+//     let arr = [];
+//     let tmp = list;
+
+//     while(tmp) {
+//         arr.push(tmp.value);
+//         tmp = tmp.next;
+//     }
+
+//     alert(arr);
+
+//     arr = arr.reverse();
+//     for(i = 0; i < arr.length; i++) {
+//         alert(arr[i]);
+//     }
+// }
+
+// printReverseList(list);
+
+// function printReverseList(list) {
+
+//     if (list.next) {
+//       printReverseList(list.next);
+//     }
+  
+//     alert(list.value);
+//   }
+  
+//   printReverseList(list);

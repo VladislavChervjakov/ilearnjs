@@ -763,6 +763,129 @@ function printNumber(from, to) {
     }, 1000);
 }
 
-printNumber(1, 5);
+//printNumber(1, 5);
 
+// function work(a, b) {
+//     alert(a + b);
+// }
+
+// function spy(func){
+//     function wrapper(...args) {
+//         wrapper.calls.push(args);
+//         return func.apply(this, arguments);
+//     }
+
+//     wrapper.calls = [];
+
+//     return wrapper;
+// }
+
+// function hash(args) {
+//     return args[0] + "," + args[1];
+// }
+
+// work = spy(work, hash);
+
+// work(1, 2); // 3
+// work(4, 5); // 9
+
+// for (let args of work.calls) {
+//     alert( 'call:' + args.join() ); // "call:1,2", "call:4,5"
+//   }
+
+function f(x) {
+    alert(x);
+}
+
+function delay(f, ms) {
+
+    return function(...args) {
+        setTimeout(function() {
+            f.call(this, args);
+        }, ms);
+    }
+}
+
+// alternative solution
+
+// function delay(f, ms) {
+
+//     return function() {
+//       setTimeout(() => f.apply(this, arguments), ms);
+//     };
+  
+//   }
+  
+
+
+
+// let f1000 = delay(f, 1000);
+
+// f1000("test"); // показывает "test" после 1000 мс
+
+// function debounce(f, ms) {
+    
+//     let isRefreshing = false;
+
+//     return function() {
+//         if(isRefreshing) return;
+
+//         f.apply(this, arguments);
+//         isRefreshing = true;
+
+//         setTimeout(() => isRefreshing = false, ms);
+//     };
+// }
+
+function f(a) {
+    console.log(a);
+}
+
+function throttle(func, ms) {
+    let isThrottled = false,
+    savedArgs, 
+    saveThis;
+
+    function wrapper() {
+        if(isThrottled) {
+            savedArgs = arguments;
+            savedThis = this;
+            return;
+        }
+        func.apply(this, arguments);
+
+        isThrottled = true;
+
+        setTimeout(function() {
+            isThrottled = false;
+            if(savedArgs) {
+                wrapper.apply(savedThis, savedArgs);
+                savedArgs = savedThis = null;
+            }
+        }, ms);
+    }
+}
+
+let head = {
+    glasses: 1
+}
+
+let table = {
+    pen: 3,
+    __proto__: head 
+
+}
+
+let bed = {
+    sheet: 1,
+    pillow: 2,
+    __proto__:  table
+}
+
+let pockets = {
+    money: 2000,
+    __proto__: bed
+}
+
+alert(pockets.pen);
 

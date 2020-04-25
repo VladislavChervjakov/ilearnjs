@@ -725,22 +725,44 @@ let counter = makeCounter();
 
 // alert( counter() ); // 10 (вместо 11)
 
-function sum(a) {
-    let currentSum = a;
+// function sum(a) {
+//     let currentSum = a;
 
-    function f(b) {
-        currentSum += b;
-        return f;
-    }
+//     function f(b) {
+//         currentSum += b;
+//         return f;
+//     }
 
-    f.toString = function() {
-        return currentSum;
-    };
+//     f.toString = function() {
+//         return currentSum;
+//     };
 
-    return f;
+//     return f;
+// }
+
+// alert( sum(1)(2) ); // 3
+// alert( sum(5)(-1)(2) ); // 6
+// alert( sum(6)(-1)(-2)(-3) ); // 0
+// alert( sum(0)(1)(2)(3)(4)(5) ); // 15
+
+function printNumber(from, to) {
+    let current = from;
+
+    // let timerId = setInterval(function() {
+    //     alert(current);
+    //     if(current == to) clearInterval(timerId);
+    //     current++;
+    // }, 1000);
+
+    let timerId = setTimeout(function increase() {
+        alert(current);
+        if(current < to) {
+            setTimeout(increase, 1000);
+        }
+        current++;
+    }, 1000);
 }
 
-alert( sum(1)(2) ); // 3
-alert( sum(5)(-1)(2) ); // 6
-alert( sum(6)(-1)(-2)(-3) ); // 0
-alert( sum(0)(1)(2)(3)(4)(5) ); // 15
+printNumber(1, 5);
+
+

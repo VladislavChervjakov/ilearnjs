@@ -912,4 +912,25 @@ Function.prototype.defer = function(ms) {
     };
 };
 
-f.defer(1000)(1, 2);
+//f.defer(1000)(1, 2);
+
+let dictionary = Object.create(null, {
+    toString: {
+        value() {
+            return Object.keys(this).join();
+        }
+    }
+});
+
+dictionary.apple = "Apple";
+dictionary.__proto__ = "test";
+
+ Object.defineProperty(dictionary, "toString", {
+    enumerable: false
+  });
+
+// for(let key in dictionary) {
+//     alert(key);
+// }
+
+alert(dictionary);

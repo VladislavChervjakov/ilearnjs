@@ -992,4 +992,15 @@ let eventMixin = {
   menu.on("select", value => alert(`Выбранное значение: ${value}`));
   
   // Генерирует событие => обработчик выше запускается и выводит:
-  menu.choose("123"); // Выбранное значение: 123
+//   menu.choose("123"); // Выбранное значение: 123
+
+let err = new FormatError("ошибка форматирования");
+
+alert( err.message ); // ошибка форматирования
+alert( err.name ); // FormatError
+alert( err.stack ); // stack
+
+alert( err instanceof FormatError ); // true
+alert( err instanceof SyntaxError );
+
+

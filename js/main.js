@@ -994,13 +994,61 @@ let eventMixin = {
   // Генерирует событие => обработчик выше запускается и выводит:
 //   menu.choose("123"); // Выбранное значение: 123
 
-let err = new FormatError("ошибка форматирования");
+// let err = new FormatError("ошибка форматирования");
 
-alert( err.message ); // ошибка форматирования
-alert( err.name ); // FormatError
-alert( err.stack ); // stack
+// alert( err.message ); // ошибка форматирования
+// alert( err.name ); // FormatError
+// alert( err.stack ); // stack
 
-alert( err instanceof FormatError ); // true
-alert( err instanceof SyntaxError );
+// alert( err instanceof FormatError ); // true
+// alert( err instanceof SyntaxError );
 
+// function delay(ms) {
+//     return new Promise(function(resolve, reject){
+//         setTimeout(resolve, ms);
+//     });
+// }
+
+// alternative solution
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// delay(3000).then(() => alert('выполнилось через 3 секунды'));
+
+async function loadJson(url) {
+    let response = await fetch(url);
+
+    if(response.status == 200) {
+        return response.json();
+    } else {
+        throw new HttpError(response);
+    }
+}
+
+async function demoGithubUser() {
+    let user;
+
+    while(true) {
+        let name = prompt("Input login?", "iliakan");
+
+        try{
+            user = await loadJson(`https://api.github.com/users/${name}`);
+            break;
+        } 
+        catch(err) {
+            if(err instanceof HttpError && err.response.status == 404) {
+                alert("Can not find user, please try again");
+            } else {
+                throw err;
+            }
+        }
+        
+    }
+
+    alert(`Full name: ${user.name}`);
+    return user;
+}
+ demoGithubUser();
 

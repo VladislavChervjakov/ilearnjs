@@ -837,55 +837,55 @@ function delay(f, ms) {
 //     };
 // }
 
-function f(a) {
-    console.log(a);
-}
+// function f(a) {
+//     console.log(a);
+// }
 
-function throttle(func, ms) {
-    let isThrottled = false,
-    savedArgs, 
-    saveThis;
+// function throttle(func, ms) {
+//     let isThrottled = false,
+//     savedArgs, 
+//     saveThis;
 
-    function wrapper() {
-        if(isThrottled) {
-            savedArgs = arguments;
-            savedThis = this;
-            return;
-        }
-        func.apply(this, arguments);
+//     function wrapper() {
+//         if(isThrottled) {
+//             savedArgs = arguments;
+//             savedThis = this;
+//             return;
+//         }
+//         func.apply(this, arguments);
 
-        isThrottled = true;
+//         isThrottled = true;
 
-        setTimeout(function() {
-            isThrottled = false;
-            if(savedArgs) {
-                wrapper.apply(savedThis, savedArgs);
-                savedArgs = savedThis = null;
-            }
-        }, ms);
-    }
-}
+//         setTimeout(function() {
+//             isThrottled = false;
+//             if(savedArgs) {
+//                 wrapper.apply(savedThis, savedArgs);
+//                 savedArgs = savedThis = null;
+//             }
+//         }, ms);
+//     }
+// }
 
-let head = {
-    glasses: 1
-}
+// let head = {
+//     glasses: 1
+// }
 
-let table = {
-    pen: 3,
-    __proto__: head 
+// let table = {
+//     pen: 3,
+//     __proto__: head 
 
-}
+// }
 
-let bed = {
-    sheet: 1,
-    pillow: 2,
-    __proto__:  table
-}
+// let bed = {
+//     sheet: 1,
+//     pillow: 2,
+//     __proto__:  table
+// }
 
-let pockets = {
-    money: 2000,
-    __proto__: bed
-}
+// let pockets = {
+//     money: 2000,
+//     __proto__: bed
+// }
 
 // alert(pockets.pen);
 
@@ -937,59 +937,59 @@ Function.prototype.defer = function(ms) {
 
 // mixin handler 
 
-let eventMixin = {
-    /**
-     * Подписаться на событие, использование:
-     * menu.on('select', function(item) { ... }
-     */
-    on(eventName, handler) {
-      if (!this._eventHandlers) this._eventHandlers = {};
-      if (!this._eventHandlers[eventName]) {
-        this._eventHandlers[eventName] = [];
-      }
-      this._eventHandlers[eventName].push(handler);
-    },
+// let eventMixin = {
+//     /**
+//      * Подписаться на событие, использование:
+//      * menu.on('select', function(item) { ... }
+//      */
+//     on(eventName, handler) {
+//       if (!this._eventHandlers) this._eventHandlers = {};
+//       if (!this._eventHandlers[eventName]) {
+//         this._eventHandlers[eventName] = [];
+//       }
+//       this._eventHandlers[eventName].push(handler);
+//     },
   
-    /**
-     * Отменить подписку, использование:
-     * menu.off('select', handler)
-     */
-    off(eventName, handler) {
-      let handlers = this._eventHandlers && this._eventHandlers[eventName];
-      if (!handlers) return;
-      for (let i = 0; i < handlers.length; i++) {
-        if (handlers[i] === handler) {
-          handlers.splice(i--, 1);
-        }
-      }
-    },
+//     /**
+//      * Отменить подписку, использование:
+//      * menu.off('select', handler)
+//      */
+//     off(eventName, handler) {
+//       let handlers = this._eventHandlers && this._eventHandlers[eventName];
+//       if (!handlers) return;
+//       for (let i = 0; i < handlers.length; i++) {
+//         if (handlers[i] === handler) {
+//           handlers.splice(i--, 1);
+//         }
+//       }
+//     },
   
-    /**
-     * Сгенерировать событие с указанным именем и данными
-     * this.trigger('select', data1, data2);
-     */
-    trigger(eventName, ...args) {
-      if (!this._eventHandlers || !this._eventHandlers[eventName]) {
-        return; // обработчиков для этого события нет
-      }
+//     /**
+//      * Сгенерировать событие с указанным именем и данными
+//      * this.trigger('select', data1, data2);
+//      */
+//     trigger(eventName, ...args) {
+//       if (!this._eventHandlers || !this._eventHandlers[eventName]) {
+//         return; // обработчиков для этого события нет
+//       }
   
-      // вызовем обработчики
-      this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
-    }
-  };
+//       // вызовем обработчики
+//       this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
+//     }
+//   };
 
-  class Menu {
-      choose(value) {
-        this.trigger("select", value);
-    }
-  }
-  // Добавим примесь с методами для событий
-  Object.assign(Menu.prototype, eventMixin);
+//   class Menu {
+//       choose(value) {
+//         this.trigger("select", value);
+//     }
+//   }
+//   // Добавим примесь с методами для событий
+//   Object.assign(Menu.prototype, eventMixin);
   
-  let menu = new Menu();
+//   let menu = new Menu();
   
-  // Добавить обработчик, который будет вызван при событии "select":
-  menu.on("select", value => alert(`Выбранное значение: ${value}`));
+//   // Добавить обработчик, который будет вызван при событии "select":
+//   menu.on("select", value => alert(`Выбранное значение: ${value}`));
   
   // Генерирует событие => обработчик выше запускается и выводит:
 //   menu.choose("123"); // Выбранное значение: 123
@@ -1145,13 +1145,26 @@ array = new Proxy(array, {
 
 // alert(eval(expression));
 
-let animals = ["тигр", "ёж", "енот", "ехидна", "АИСТ", "ЯК"];
+// let animals = ["тигр", "ёж", "енот", "ехидна", "АИСТ", "ЯК"];
 
-var collator = new Intl.Collator(undefined, {
-    sensitivity: "accent"
-});
-animals.sort(function(a,b) {
-    return collator.compare(a, b);
-});
+// var collator = new Intl.Collator(undefined, {
+//     sensitivity: "accent"
+// });
+// animals.sort(function(a,b) {
+//     return collator.compare(a, b);
+// });
 
-alert(animals);
+// alert(animals);
+
+let table = document.body.firstElementChild;
+
+function colorTable(table) {
+    let trs = table.rows;
+
+    for (let i = 0; i < trs.length; i++) {
+       trs[i].cells[i].style.background = "red";
+    }
+    
+}
+
+colorTable(table);

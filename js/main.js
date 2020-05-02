@@ -1145,3 +1145,13 @@ array = new Proxy(array, {
 
 // alert(eval(expression));
 
+let animals = ["тигр", "ёж", "енот", "ехидна", "АИСТ", "ЯК"];
+
+var collator = new Intl.Collator(undefined, {
+    sensitivity: "accent"
+});
+animals.sort(function(a,b) {
+    return collator.compare(a, b);
+});
+
+alert(animals);

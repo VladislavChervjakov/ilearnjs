@@ -361,31 +361,31 @@ function compareReverse(a,b) {
 
 //alert(count(user));
 
-let user = {name: "John", years: 30};
+// let user = {name: "John", years: 30};
 
-let {name, years: age, isAdmin = false} = user
+// let {name, years: age, isAdmin = false} = user
 
-let salaries = {
-    "John": 100, 
-    "Pete": 300,
-    "Mary": 250
-}
+// let salaries = {
+//     "John": 100, 
+//     "Pete": 300,
+//     "Mary": 250
+// }
 
-function topSalary(salaries) {
-    let max = 0;
-    let maxName = null;
+// function topSalary(salaries) {
+//     let max = 0;
+//     let maxName = null;
 
-    if(Object.keys(salaries).length === 0) return null;
+//     if(Object.keys(salaries).length === 0) return null;
 
-    for([key, value] of Object.entries(salaries)) {
-        if (max < value) {
-            max = value;
-            maxName = key;
-        }
-    }
+//     for([key, value] of Object.entries(salaries)) {
+//         if (max < value) {
+//             max = value;
+//             maxName = key;
+//         }
+//     }
 
-    return `${maxName} ${max}`;
-}
+//     return `${maxName} ${max}`;
+// }
 
 //alert(topSalary(salaries));
 
@@ -1011,58 +1011,137 @@ let eventMixin = {
 
 // alternative solution
 
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function delay(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
-// delay(3000).then(() => alert('выполнилось через 3 секунды'));
+// // delay(3000).then(() => alert('выполнилось через 3 секунды'));
 
-async function loadJson(url) {
-    let response = await fetch(url);
+// async function loadJson(url) {
+//     let response = await fetch(url);
 
-    if(response.status == 200) {
-        return response.json();
-    } else {
-        throw new HttpError(response);
-    }
-}
+//     if(response.status == 200) {
+//         return response.json();
+//     } else {
+//         throw new HttpError(response);
+//     }
+// }
 
-async function demoGithubUser() {
-    let user;
+// async function demoGithubUser() {
+//     let user;
 
-    while(true) {
-        let name = prompt("Input login?", "iliakan");
+//     while(true) {
+//         let name = prompt("Input login?", "iliakan");
 
-        try{
-            user = await loadJson(`https://api.github.com/users/${name}`);
-            break;
-        } 
-        catch(err) {
-            if(err instanceof HttpError && err.response.status == 404) {
-                alert("Can not find user, please try again");
+//         try{
+//             user = await loadJson(`https://api.github.com/users/${name}`);
+//             break;
+//         } 
+//         catch(err) {
+//             if(err instanceof HttpError && err.response.status == 404) {
+//                 alert("Can not find user, please try again");
+//             } else {
+//                 throw err;
+//             }
+//         }
+        
+//     }
+
+//     alert(`Full name: ${user.name}`);
+//     return user;
+// }
+// //  demoGithubUser();
+
+// function* pseudoRandom(seed) {
+//     let value = seed;
+//     while(true) {
+//         value =  value * 16807 % 2147483647;
+//         yield value;
+//     }
+// }
+
+// let generator = pseudoRandom(1);
+
+// alert(generator.next().value);
+// alert(generator.next().value);
+// alert(generator.next().value);
+// alert(generator.next().value);
+
+
+// let user = {
+//     name: "John"
+// };
+
+function wrap(target) {
+    return new Proxy(target, {
+        get(target, prop, reciever) {
+            if(prop in target) {
+                return Reflect.get(target, prop, reciever);
             } else {
-                throw err;
+                throw new ReferenceError(`Error there is no property ${prop}`);
             }
         }
-        
-    }
-
-    alert(`Full name: ${user.name}`);
-    return user;
-}
-//  demoGithubUser();
-
-function* pseudoRandom(seed) {
-    let value = seed;
-    while(true) {
-        value =  value * 16807 % 2147483647;
-        yield value;
-    }
+    })
 }
 
-let generator = pseudoRandom(1);
+// user = wrap(user);
 
-alert(generator.next().value);
-alert(generator.next().value);
-alert(generator.next().value);
-alert(generator.next().value);
+// alert(user.name); // John
+// alert(user.age); 
+
+let array = [1, 2, 3];
+
+// array = new Proxy(array, {
+//     get(array, prop, reciever) {
+//         if(prop < 0) {
+//             return array[array.length - (prop * -1)]
+//         } else {
+//             return array[prop];
+//         }
+//     }
+// });
+
+array = new Proxy(array, {
+    get(target, prop, reciever) {
+        if(prop < 0) {
+            prop = array.length - (prop * -1);
+        }
+
+        return Reflect.get(target, prop, reciever);
+    }
+});
+// alert(array[-1]);
+// alert(array[-2]);
+
+// function makeObservable(target) {
+//     target[handlers] = [];
+//     target.observe = function(handler) {
+//         this.handlers.push(handler);
+//     }
+
+//     return new Proxy(target, {
+//         set(target, property, value, reciever) {
+//             let success = Reflect.set(...arguments);
+//             if(success) {
+//                 target[handlers].forEach(handler => handler(property, value));
+//             }
+
+//             return success;
+//         }
+//     });
+// }
+
+// let user = {};
+
+// user = makeObservable(user);
+
+// user.observe((key, value) => {
+//   alert(`SET ${key}=${value}`);
+// });
+
+// user.name = "John";
+
+// let expression = prompt("Input expression: ", '2*3+2');
+
+// alert(eval(expression));
+

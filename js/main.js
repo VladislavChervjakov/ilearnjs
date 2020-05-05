@@ -1156,15 +1156,27 @@ array = new Proxy(array, {
 
 // alert(animals);
 
-let table = document.body.firstElementChild;
+// let table = document.body.firstElementChild;
 
-function colorTable(table) {
-    let trs = table.rows;
+// function colorTable(table) {
+//     let trs = table.rows;
 
-    for (let i = 0; i < trs.length; i++) {
-       trs[i].cells[i].style.background = "red";
-    }
+//     for (let i = 0; i < trs.length; i++) {
+//        trs[i].cells[i].style.background = "red";
+//     }
     
-}
+// }
 
-colorTable(table);
+// colorTable(table);
+
+let lis = document.querySelectorAll("li");
+
+for(li of lis) {
+    let title = li.firstChild.data;
+
+    title = title.trim();
+
+    let count = li.getElementsByTagName('li').length;
+
+    alert(title + ": " + count);
+}

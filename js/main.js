@@ -1169,14 +1169,32 @@ array = new Proxy(array, {
 
 // colorTable(table);
 
-let lis = document.querySelectorAll("li");
+// let lis = document.querySelectorAll("li");
 
-for(li of lis) {
-    let title = li.firstChild.data;
+// for(li of lis) {
+//     let title = li.firstChild.data;
 
-    title = title.trim();
+//     title = title.trim();
 
-    let count = li.getElementsByTagName('li').length;
+//     let count = li.getElementsByTagName('li').length;
 
-    alert(title + ": " + count);
+//     alert(title + ": " + count);
+// }
+
+let data = document.querySelector('[data-widget-name]').dataset.widgetName;
+
+// alert(data);
+
+let links = document.querySelectorAll("li > a");
+
+for(link of links) {
+    let href = link.getAttribute('href');
+
+    if(!href) continue;
+
+    if(!href.includes('://')) continue;
+
+    if(href.startsWith('http://internal.com')) continue;
+
+    link.style.color = 'orange';
 }

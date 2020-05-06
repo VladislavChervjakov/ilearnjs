@@ -1401,21 +1401,34 @@ array = new Proxy(array, {
 // .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
 // table.tBodies[0].append(...sortedRows);
 
-function showNotification(obj) {
-    let div = document.createElement('div');
-    div.style.position = 'relative';
-    div.style.top = obj.top + 'px';
-    div.style.left = obj.right + 'px';
-    div.innerHTML = obj.html;
-    div.className = obj.className;
-    if(className) div.classList.add(obj.className);
-    document.body.append(div);
-    setTimeout(() => div.style.display = "none", 1500);
-}
+// function showNotification(obj) {
+//     let div = document.createElement('div');
+//     div.style.position = 'relative';
+//     div.style.top = obj.top + 'px';
+//     div.style.left = obj.right + 'px';
+//     div.innerHTML = obj.html;
+//     div.className = obj.className;
+//     if(className) div.classList.add(obj.className);
+//     document.body.append(div);
+//     setTimeout(() => div.style.display = "none", 1500);
+// }
 
-showNotification({
-    top: 10, // 10px от верхней границы окна (по умолчанию 0px)
-    left: 10, // 10px от правого края окна (по умолчанию 0px)
-    html: "Hello!", // HTML-уведомление
-    className: "welcome" // дополнительный класс для div (необязательно)
-  });
+// showNotification({
+//     top: 10, // 10px от верхней границы окна (по умолчанию 0px)
+//     left: 10, // 10px от правого края окна (по умолчанию 0px)
+//     html: "Hello!", // HTML-уведомление
+//     className: "welcome" // дополнительный класс для div (необязательно)
+//   });
+
+// let element = document.querySelector('#elem');
+// //  let scrollBottom = element.scrollHeight - element.scrollTop - element.clientHeight;
+
+//  let scrollBarWidth = element.offsetWidth - element.clientWidth;
+//  alert(scrollBarWidth);
+
+ let field = document.querySelector('#field');
+  let ball = document.querySelector('#ball');
+
+  ball.style.left = Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + 'px';
+  ball.style.top = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2)+ 'px';
+

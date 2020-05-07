@@ -1426,9 +1426,79 @@ array = new Proxy(array, {
 //  let scrollBarWidth = element.offsetWidth - element.clientWidth;
 //  alert(scrollBarWidth);
 
- let field = document.querySelector('#field');
-  let ball = document.querySelector('#ball');
+//  let field = document.querySelector('#field');
+//   let ball = document.querySelector('#ball');
 
-  ball.style.left = Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + 'px';
-  ball.style.top = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2)+ 'px';
+//   ball.style.left = Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + 'px';
+//   ball.style.top = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2)+ 'px';
 
+/**
+     * Позиционирует элемент elem относительно элемента anchor в соответствии со значением position.
+     *
+     * @param {Node} anchor     элемент, около которого позиционируется другой элемент
+     * @param {string} position одно из: top/right/bottom
+     * @param {Node} elem       элемент, который позиционируется
+     *
+     * Оба элемента elem и anchor должны присутствовать в документе
+     */
+
+    function getCoords(elem) {
+        let box = elem.getBoundingClientRect();
+  
+        return {
+          top: box.top + pageYOffset,
+          left: box.left + pageXOffset
+        };
+      }
+    function positionAt(anchor, position, elem) {
+        let coords = anchor.getBoundingClientRect();
+
+        if(position === 'top') {
+
+            elem.style.top = coords.top - elem.offsetHeight + 'px';
+            elem.style.left = coords.left + 'px';
+        }
+        if(position === 'bottom') {
+            elem.style.top = coords.top + anchor.offsetHeight + 'px';
+            elem.style.left = coords.left + 'px';
+        }
+        if(position === 'right') {
+            elem.style.top = coords.top + 'px';
+            elem.style.left = coords.left + anchor.offsetWidth + 'px';
+        }
+        if(position === 'top-in') {
+            elem.style.top = coords.top + 'px';
+            elem.style.left = coords.left + 'px';
+        }
+        if(position === 'bottom-in'){
+            elem.style.top = coords.top + anchor.offsetHeight - elem.offsetHeight + 'px';
+            elem.style.left = coords.left + 'px';
+        }
+        if(position === 'right-in'){
+            elem.style.top = coords.top + 'px';
+            elem.style.left = coords.left + anchor.offsetWidth - elem.offsetWidth + 'px';
+        }
+    }   
+
+    /**
+     * Показывает заметку с заданным содержимым на заданной позиции
+     * относительно элемента anchor.
+     */
+    function showNote(anchor, position, html) {
+      let note = document.createElement('div');
+      note.className = "note";
+      note.innerHTML = html;
+      document.body.append(note);
+
+      positionAt(anchor, position, note);
+    }
+
+    // test it
+    let blockquote = document.querySelector('blockquote');
+
+    showNote(blockquote, "top", "note above");
+    showNote(blockquote, "right", "note at the right");
+    showNote(blockquote, "bottom", "note below");
+    showNote(blockquote, "top-in", "note top in");
+    showNote(blockquote, "bottom-in", "note bottom in");
+    showNote(blockquote, "right-in", "note right in");

@@ -1442,63 +1442,639 @@ array = new Proxy(array, {
      * Оба элемента elem и anchor должны присутствовать в документе
      */
 
+    // function getCoords(elem) {
+    //     let box = elem.getBoundingClientRect();
+  
+    //     return {
+    //       top: box.top + pageYOffset,
+    //       left: box.left + pageXOffset
+    //     };
+    //   }
+    // function positionAt(anchor, position, elem) {
+    //     let coords = anchor.getBoundingClientRect();
+
+    //     if(position === 'top') {
+
+    //         elem.style.top = coords.top - elem.offsetHeight + 'px';
+    //         elem.style.left = coords.left + 'px';
+    //     }
+    //     if(position === 'bottom') {
+    //         elem.style.top = coords.top + anchor.offsetHeight + 'px';
+    //         elem.style.left = coords.left + 'px';
+    //     }
+    //     if(position === 'right') {
+    //         elem.style.top = coords.top + 'px';
+    //         elem.style.left = coords.left + anchor.offsetWidth + 'px';
+    //     }
+    //     if(position === 'top-in') {
+    //         elem.style.top = coords.top + 'px';
+    //         elem.style.left = coords.left + 'px';
+    //     }
+    //     if(position === 'bottom-in'){
+    //         elem.style.top = coords.top + anchor.offsetHeight - elem.offsetHeight + 'px';
+    //         elem.style.left = coords.left + 'px';
+    //     }
+    //     if(position === 'right-in'){
+    //         elem.style.top = coords.top + 'px';
+    //         elem.style.left = coords.left + anchor.offsetWidth - elem.offsetWidth + 'px';
+    //     }
+    // }   
+
+    // /**
+    //  * Показывает заметку с заданным содержимым на заданной позиции
+    //  * относительно элемента anchor.
+    //  */
+    // function showNote(anchor, position, html) {
+    //   let note = document.createElement('div');
+    //   note.className = "note";
+    //   note.innerHTML = html;
+    //   document.body.append(note);
+
+    //   positionAt(anchor, position, note);
+    // }
+
+    // // test it
+    // let blockquote = document.querySelector('blockquote');
+
+    // showNote(blockquote, "top", "note above");
+    // showNote(blockquote, "right", "note at the right");
+    // showNote(blockquote, "bottom", "note below");
+    // showNote(blockquote, "top-in", "note top in");
+    // showNote(blockquote, "bottom-in", "note bottom in");
+    // showNote(blockquote, "right-in", "note right in");
+
+    // let button = document.querySelector('.hide-text-button');
+    // let text = document.querySelector('.text');
+
+    // button.addEventListener('click', () => text.style.display = 'none');
+
+    // let button = document.querySelector('.hide-self-button');
+
+    // button.addEventListener('click', () => button.style.display = 'none');
+
+    // let field = document.querySelector('#field');
+    // let ball = document.querySelector('#ball');
+
+    // field.addEventListener('click', function(event) {
+    //     // alert(event.clientY + " : " + event.clientX);
+    //     let coordFields = this.getBoundingClientRect();
+    //     let ballCoords = ball.getBoundingClientRect();
+    //     if (ballCoords.top < 0) ballCoords.top = 0;
+    //   // запрещаем пересекать левую границу поля
+    //   if (ballCoords.left < 0) ballCoords.left = 0;
+    //     ball.style.left = event.clientX - coordFields.left - field.clientLeft - ball.offsetWidth/2 + 'px';
+    //     ball.style.top = event.clientY - coordFields.top - field.clientTop - ball.clientHeight/2 + 'px';
+    //       // // запрещаем пересекать правую границу поля
+    // if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+    //     ballCoords.left = field.clientWidth - ball.clientWidth;
+    //   }
+    // });
+
+    // let elem = document.querySelector('#elem');
+    // let scrollBottom;
+    // elem.addEventListener('click', function(){
+    //     scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight;
+    //     console.log(scrollBottom);
+    // });
+
+    // console.log(elem.offsetWidth - elem.clientWidth);
+
+    // let field = document.querySelector('#field');
+    // let ball = document.querySelector('#ball');
+    // ball.style.left = field.clientWidth/2 - ball.clientWidth/2 + 'px';
+    // ball.style.top = field.clientHeight/2 - ball.clientHeight/2 + 'px';
+    // alert(ballCoordinates);
+
+    // let field = document.querySelector('#field');
+    // let coords = field.getBoundingClientRect();
+    // let topLeft = [coords.left, coords.top];
+    // let rightBottom = [coords.right, coords.bottom];
+    // let innerTop = [coords.left + field.clientLeft, coords.top + field.clientTop]; 
+    // let innerBottom = [coords.left + field.clientLeft + field.clientWidth,
+    //      coords.top + field.clientTop + field.clientHeight];
+
+    // console.log(topLeft[0] + ":"+ topLeft[1]);
+    // console.log(rightBottom[0] + ":"+ rightBottom[1]);
+    // console.log(innerTop[0] + ":"+ innerTop[1]);
+    // console.log(innerBottom[0] + ":"+ innerBottom[1]);
+
     function getCoords(elem) {
         let box = elem.getBoundingClientRect();
-  
+
         return {
-          top: box.top + pageYOffset,
-          left: box.left + pageXOffset
+            top: box.top + pageYOffset,
+            left: box.left + pageXOffset
         };
-      }
-    function positionAt(anchor, position, elem) {
-        let coords = anchor.getBoundingClientRect();
-
-        if(position === 'top') {
-
-            elem.style.top = coords.top - elem.offsetHeight + 'px';
-            elem.style.left = coords.left + 'px';
-        }
-        if(position === 'bottom') {
-            elem.style.top = coords.top + anchor.offsetHeight + 'px';
-            elem.style.left = coords.left + 'px';
-        }
-        if(position === 'right') {
-            elem.style.top = coords.top + 'px';
-            elem.style.left = coords.left + anchor.offsetWidth + 'px';
-        }
-        if(position === 'top-in') {
-            elem.style.top = coords.top + 'px';
-            elem.style.left = coords.left + 'px';
-        }
-        if(position === 'bottom-in'){
-            elem.style.top = coords.top + anchor.offsetHeight - elem.offsetHeight + 'px';
-            elem.style.left = coords.left + 'px';
-        }
-        if(position === 'right-in'){
-            elem.style.top = coords.top + 'px';
-            elem.style.left = coords.left + anchor.offsetWidth - elem.offsetWidth + 'px';
-        }
-    }   
-
-    /**
-     * Показывает заметку с заданным содержимым на заданной позиции
-     * относительно элемента anchor.
-     */
-    function showNote(anchor, position, html) {
-      let note = document.createElement('div');
-      note.className = "note";
-      note.innerHTML = html;
-      document.body.append(note);
-
-      positionAt(anchor, position, note);
     }
 
-    // test it
-    let blockquote = document.querySelector('blockquote');
+    // function positionAt(anchor, position, elem){
+    //     let coords = anchor.getBoundingClientRect();
+    //     switch(position) {
+    //         case 'top':
+    //         elem.style.top = coords.top - elem.clientHeight + 'px';
+    //         elem.style.left = coords.left + 'px';
+    //         break;
+    //         case 'right': 
+    //         elem.style.top = coords.top + 'px';
+    //         elem.style.left = coords.left + anchor.offsetWidth + 'px';
+    //         break;
+    //         case 'bottom':
+    //         elem.style.top = coords.bottom + 'px';
+    //         elem.style.left = coords.left + 'px';
+    //     }
+    // }
 
-    showNote(blockquote, "top", "note above");
-    showNote(blockquote, "right", "note at the right");
-    showNote(blockquote, "bottom", "note below");
-    showNote(blockquote, "top-in", "note top in");
-    showNote(blockquote, "bottom-in", "note bottom in");
-    showNote(blockquote, "right-in", "note right in");
+    // function showNote(anchor, position, html) {
+    //     let note = document.createElement('div');
+    //     note.className = "note";
+    //     note.innerHTML = html;
+    //     document.body.append(note);
+  
+    //     positionAt(anchor, position, note);
+    //   }
+  
+    //   // test it
+    //   let blockquote = document.querySelector('blockquote');
+  
+    //   showNote(blockquote, "top", "note above");
+    //   showNote(blockquote, "right", "note at the right");
+    //   showNote(blockquote, "bottom", "note below");
+
+
+    //   function positionAt(anchor, position, elem){
+    //     let coords = getCoords(anchor);
+    //     switch(position) {
+    //         case 'top':
+    //             elem.style.top = coords.top - elem.offsetHeight + 'px';
+    //             elem.style.left = coords.left + 'px';
+    //             break;
+    //         case 'right': 
+    //             elem.style.top = coords.top + 'px';
+    //             elem.style.left = coords.left + anchor.offsetWidth + 'px';
+    //             break;
+    //         case 'bottom':
+    //             elem.style.top = coords.top + anchor.offsetHeight + 'px';
+    //             elem.style.left = coords.left + 'px';
+    //             break;
+    //         case 'top-in':
+    //             elem.style.top = coords.top + 'px';
+    //             elem.style.left = coords.left + 'px';
+    //             break;
+    //         case 'bottom-in': 
+    //             elem.style.top = coords.top + anchor.offsetHeight - elem.offsetHeight + 'px';
+    //             elem.style.left = coords.left + 'px';
+    //             break;
+    //         case 'right-in':
+    //             elem.style.top = coords.top + 'px';
+    //             elem.style.left = coords.left + anchor.offsetWidth - elem.offsetWidth + 'px';
+    //     }
+    // }
+
+    // function showNote(anchor, position, html) {
+    //     let note = document.createElement('div');
+    //     note.className = "note";
+    //     note.innerHTML = html;
+    //     document.body.append(note);
+  
+    //     positionAt(anchor, position, note);
+    //   }
+  
+    //   // test it
+    //   let blockquote = document.querySelector('blockquote');
+  
+    //   showNote(blockquote, "top", "note above");
+    //   showNote(blockquote, "right", "note at the right");
+    //   showNote(blockquote, "bottom", "note below");
+    //   showNote(blockquote, "top-in", "note top-in");
+    //   showNote(blockquote, "bottom-in", "note bottom-in");
+    //   showNote(blockquote, "right-in", "note right-in");
+
+    // let hideText = document.querySelector('.hide-text-button');
+    // let hideSelf = document.querySelector('.hide-self-button');
+    // let text = document.querySelector('.text');
+    // hideText.addEventListener('click', function(){
+    //     text.style.display = 'none';
+    // });
+    // hideSelf.addEventListener('click', function(){
+    //     hideSelf.style.display = 'none';
+    // });
+
+    // let field = document.querySelector('#field');
+    // let ball = document.querySelector('#ball');
+    
+    // field.addEventListener('click', function(event){
+    //     let coordField = field.getBoundingClientRect();
+  
+    //     let left = event.clientX - coordField.left - field.clientLeft - ball.offsetWidth/2;
+    //     let top = event.clientY - coordField.top - field.clientTop - ball.offsetHeight/2;
+
+    //     if(top + ball.clientHeight > field.clientHeight) {
+    //         top = field.clientHeight - ball.clientHeight;
+    //     }
+
+    //     if(left + ball.clientWidth > field.clientWidth){
+    //         left = field.clientWidth - ball.clientWidth;
+    //     }
+
+    //     if(top < 0){
+    //         top = 0;
+    //     }
+
+    //     if(left < 0){
+    //         left = 0    ;
+    //     }
+
+    //     ball.style.left = left + 'px';
+       // ball.style.top = top + 'px';
+        // ball.style.top =  event.clientY - ball.offsetHeight + 'px';
+        // ball.style.left = event.clientX - ball.offsetWidth + 'px';
+        // if(ball.offsetTop < 0) ball.offsetTop = 0; 
+
+  //  });
+
+//   let toggler = document.querySelector('.toggler');
+//   let dropdown = document.querySelector('.dropdown');
+
+//   toggler.addEventListener('click', function(){
+        
+//         dropdown.classList.toggle('show');
+//         if(dropdown.classList.contains('show')){
+//             toggler.innerHTML = '▼';
+//         } else {
+//             toggler.innerHTML = '▶';
+//          }
+//   });
+
+// let panes = document.querySelectorAll('.pane');
+// panes.forEach(function(pane){
+//     pane.insertAdjacentHTML('afterbegin', '<button class="remove-button">[x]</button>');
+//     pane.firstChild.onclick = function(){
+//         pane.style.display = 'none';
+//     };
+// });
+    
+// let removeBtns = document.querySelectorAll('.remove-button');
+
+
+// removeBtns.forEach(function(removeBtn){
+//     removeBtn.addEventListener('click', function(){
+//         let parent = removeBtn.parentElement;
+//         console.log(parent);
+//         parent.style.display = 'none';
+//     });
+// });
+
+// let width = 130;
+// let count = 3;
+
+// let listC = document.querySelector('ul');
+// let listElems = document.querySelectorAll('li');
+// let prev = document.querySelector('.arrow-left');
+// let next = document.querySelector('.arrow-right');
+
+// let position = 0;
+
+// prev.onclick = function() {
+//     position += width * count;
+
+//     position = Math.min(position,0);
+//     listC.style.marginLeft = position + 'px';
+// }
+
+// next.onclick = function() {
+//     position -= width * count;
+//     position = Math.max(position, -width * (listElems.length - count));
+//     listC.style.marginLeft = position + 'px';
+// }
+
+// let pane = document.querySelector('.pane');
+// let container = document.querySelector('#container');
+// container.onclick = function(event){
+//     let target = event.target;
+
+//     if(target.className == 'remove-button'){
+//         event.target.closest('.pane').remove();
+//     }
+// };
+ 
+
+
+// let tree = document.querySelector('.tree');
+
+// tree.addEventListener('click', function(event){
+//     let span = event.target;
+//     if(span.tagName !== "SPAN") return;
+//     for(let node of Array.from(span.parentElement.childNodes).slice(1)){
+//         node.hidden = !node.hidden;
+//     }
+// });
+
+      //  ловим клики на всём дереве
+    //   tree.onclick = function(event) {
+  
+    //     if (event.target.tagName != 'SPAN') {
+    //       return;
+    //     }
+  
+    //     let childrenContainer = event.target.parentNode.querySelector('ul');
+    //     console.log(childrenContainer);
+    //     if (!childrenContainer) return; // нет детей
+  
+    //     childrenContainer.hidden = !childrenContainer.hidden;
+    //   }
+
+
+// let table = document.querySelector("#grid");
+
+// table.onclick = function(e){
+//     if (e.target.tagName != 'TH') return;
+
+//     let th = e.target;
+
+//     sortTable(th.cellIndex, th.dataset.type);
+        
+//     }
+
+// function sortTable(colPos, type){
+//     let tbody = table.querySelector('tbody');
+//     let rowsArray = Array.from(tbody.rows);
+//     let compare;
+
+//     switch (type) {
+//         case 'number':
+//             compare = function(rowA, rowB){
+//                 return rowA.cells[colPos].innerHTML - rowB.cells[colPos].innerHTML;
+//             };
+//         break;
+//         case 'string':
+//             compare = function(rowA, rowB){
+//                 return rowA.cells[colPos].innerHTML > rowB.cells[colPos].innerHTML ? 1 : -1;
+//             };
+//         break;
+//     }
+
+//     rowsArray.sort(compare);
+//     tbody.append(...rowsArray);
+
+// }
+
+
+// function createTooltip(text){
+//     let tooltip = document.createElement('div');
+//     tooltip.classList.add('tooltip');
+//     tooltip.innerHTML = text;
+//     return tooltip;
+// }
+
+// let button = document.querySelector('button');
+
+// document.onmouseover = function(event){
+//     let target = event.target;
+//     if(target.tagName != 'BUTTON') return;
+//     let tooltip = createTooltip(event.target.dataset.tooltip);
+//     let buttonCoord = target.getBoundingClientRect();
+//     document.body.append(tooltip);
+//     tooltip.style.top = buttonCoord.top - tooltip.offsetHeight - 5 + 'px';
+//     tooltip.style.left = buttonCoord.left + 'px';
+//     let top = buttonCoord.top - tooltip.offsetHeight - 5;
+//     if(top < 0){
+//         tooltip.style.top = buttonCoord.top + event.target.offsetHeight + 5 + 'px';
+//     }
+//     target.onmouseout = function(){
+//         tooltip.hidden = true;
+//     }
+// }
+
+// task 1
+// let text = 'Hi, we are learning Javascript!'
+// let reverseText = text.split('').reverse().join('');
+// console.log(reverseText);
+
+// task 2
+
+let people = [
+    {name: 'Michael', budget: 4500},
+    {name: 'Max', budget: 4300},
+    {name: 'Mark', budget: 4100},
+];
+
+let cars = ['Mercedes', 'Lexus', 'Lamborghini'];
+
+let fib = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// console.log(cars.includes('Lexus'));
+
+// let upperCaseCars = cars.map(car => {
+//     return car.toUpperCase();
+// });
+
+let pow2 = num => num ** 2;
+// let sqrt = num => Math.sqrt(num);
+
+// let pow2Fib = fib.map(pow2).map(Math.sqrt);
+let pow2Fib = fib.map(pow2);
+let filteredNumbers =  pow2Fib.filter(num => num > 20);
+
+let allBudget = people
+    .filter(person => person.budget > 4100)
+    .reduce((acc, person) => {
+        acc += person.budget;
+        return acc;
+}, 0);
+
+let arr = [ 1, 2 , 3 , 4 , 5 , 6 , 7, 8 ,9];
+let sum = arr.reduce((acc, num) => {
+    acc += num;
+    return acc;
+});
+let mult = arr.reduce((acc, num) => {
+    acc *= num;
+    return acc;
+});
+
+console.log('Summ: ' + sum + ' , ' + 'Multiple: ' + mult);
+
+let falseArray = [NaN, 0, 77, false, -17, '',undefined, 99, null];
+let filtered = falseArray.filter(value => value !== false);
+
+let litmir = [ 
+    { author: 'Хэленка', title: 'Улетела сказка'},
+    { author: 'Коул Кресли', title: 'Восстание Аркан'},
+    { author: 'Райчел Мид', title: 'Золотая лилия'}
+];
+
+let sorted = litmir.sort((a, b) => {
+    if(a.title > b.title) return 1;
+    if(a.title < b.title) return -1;
+    return 0;
+
+});
+
+var num = 5;
+var arrNum = [1, 6, 5, 2, 7, 5, 1, 4, 3, 9, 8, 11, 10, 18];
+let emptyPair;
+function findCouple(array, number){
+    let pairs = [];
+    for(let i = 0; i < array.length; i++){
+        for(let j = i + 1; j < array.length; j++){
+            // console.log(array[i] + ':' + array[j]);
+            if(array[i] + array[j] === number){
+                pairs.push('Your pair of numbers is: ' + array[i] + ' + ' + array[j]);
+            } 
+        }
+    }
+    pairs.forEach(pair => console.log(pair));
+}
+
+function propertyValue(array, key){
+    array.forEach(element => console.log(element[key]));
+}
+
+propertyValue(litmir, 'author');
+
+findCouple(arrNum, 5);  
+
+// console.log(sorted);
+// console.log(falseArray);
+// console.log(filtered);
+// console.log(allBudget);
+
+// console.log(fib);
+// console.log(pow2Fib);
+// console.log(filteredNumbers);
+// console.log(cars);
+// console.log(upperCaseCars);
+
+// method find
+// let person = people.find(function(person) {
+//     return person.budget == 4300;
+// });
+//let person = people.find(person => person.budget === 4300);
+// loop
+// let searchedPerson;
+// for(let person of people){
+//     if(person.budget === 4300){
+//         searchedPerson = person;
+//     }
+// }
+// console.log(searchedPerson);
+
+//console.log(person);
+
+
+let person = {
+    name: 'Vlad',
+    age: 22,
+    isProgrammer: true,
+    languages: ['ru', 'en', 'de'],
+    ['key_' + (1 + 3)]: 'Complex Key', // key_4
+    greet() {
+        console.log('greet from person');
+    },
+    info() {
+        console.info('Name of the person: ' + this.name);
+    }
+};
+
+let {name, age: personAge = 10, languages} = person;
+
+console.log(name + ' : ' + personAge + ' : ' + languages);
+
+let logger = {
+    keys() {
+        console.log('Object keys: ', Object.keys(this));
+    },
+    keysAndValues() {
+        // let self = this;
+        Object.keys(this).forEach(key => {
+            console.log(key + ' : '  + this[key]);
+        });
+        // Object.keys(this).forEach(function(key){
+        //     console.log(key + ' : '  + this[key]);
+        // }.bind(this));
+    },
+    withParams(top = false, between = false, bottom = false){
+        if(top) {
+            console.log('-------- Start ---------');
+        }
+        Object.keys(this).forEach((key, index, array) => {
+            console.log(key + ' : '  + this[key]);
+            if(between && index !== array.length - 1) {
+                console.log('-------------------');
+            }
+        });
+        if(bottom) {
+            console.log('--------- End ---------');
+        }
+        
+    }
+}
+
+let timeout = setTimeout(() => {
+    console.log('After 2.5 seconds');
+}, 2500);
+
+let interval = setInterval(() => {
+    console.log('After 1 second');
+}, 1000);
+
+// let delay = (callback, wait = 1000) => {
+//     setTimeout(callback, wait);
+// };
+
+// delay(() => {
+//     console.log('After 2 seconds');
+// }, 2000);
+
+let delays = (wait = 1000) => {
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+            // reject('Something went wrong. Try again');
+        }, wait);
+    });
+   return promise;
+};
+
+// delays(2500)
+//     .then(() => {
+//         console.log('After 2 seconds')
+//     })
+//     .catch(err => console.error('Error:', err))
+//     .finally(() => console.log('finally'))
+
+clearInterval(interval);
+
+let getData = () => new Promise(resolve => resolve([
+    1, 1, 2, 3, 5, 8, 13
+]));
+
+getData().then(data => console.log(data));
+
+async function asyncExample() {
+    try{
+        await delays(3000);
+        let data = await getData();
+        console.log('Data', data);
+    } catch (e){
+        console.log(e);
+    } finally{
+        console.log('Finally');
+    }
+}
+
+asyncExample();
+
+// let bound = logger.keys.bind(person);
+// bound();
+
+// logger.keys.call(person);
+// logger.keysAndValues.call(person);
+// logger.keysAndValues.call({a: 1, c: 2});
+
+// logger.withParams.call(person, true, true, true);
+// logger.withParams.apply(person, [true, true, true]);
+
+
+// console.log(person);
+// delete person['key_4'];
+// console.log(person);

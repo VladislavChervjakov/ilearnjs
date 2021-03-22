@@ -171,6 +171,8 @@ let third = () => console.log('Third');
 let tab = function () {
     let tabNav = document.querySelectorAll('.tabs-nav__item');
     let tabContent = document.querySelectorAll('.tab');
+    let tabs = document.querySelector('.tabs');
+    let tabsNav = document.querySelector('.tabs__nav');
     let tabName;
 
     function changeTab(i) {
@@ -193,6 +195,48 @@ let tab = function () {
             changeTab(i);
         });
     }
+
+    if(tabNav.offsetWidth > tabs.offsetWidth) console.log('show arrows')
+    console.log(tabsNav.offsetWidth + ':' + tabs.offsetWidth);
+    
 };
 
 tab();
+
+function likes(names) {
+  
+    if(names.length < 1) return 'no one likes this';
+    let result = '';
+    for(let i = 0; i < names.length; i++) {
+       result += names[i] + ' , ';
+    }
+    return result;
+    
+  }
+console.log(likes(['Peter']));
+
+const $targets = document.querySelectorAll('.target');
+
+let clicksInLoop = targets => {
+    targets.forEach( target => {
+        target.addEventListener( 'click', () => {
+            console.log('Click');
+            alert('Click');
+        } );
+    } );
+};
+
+clicksInLoop($targets);
+
+let $menuItems = document.querySelectorAll( '.list-item' );
+
+let mouseOverMenu = items => {
+    items.forEach( item => {
+        item.addEventListener( 'mouseover', e => {
+            let dropdown = item.querySelector('.test-dropdown');
+            dropdown.style.display = "flex";
+        } );
+    } );
+};
+
+mouseOverMenu( $menuItems );

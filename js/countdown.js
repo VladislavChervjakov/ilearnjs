@@ -1,6 +1,6 @@
 document.addEventListener( 'DOMContentLoaded', () => {
 
-    const date = new Date( 'Jan 1 2024 00:00:00' );
+    const date = new Date( 'May 1 2021 00:00:00' );
     
     const $years = document.querySelector( '.time-count-item-years .time-count-val'  );
     const $month = document.querySelector( '.time-count-item-month .time-count-val' );
@@ -20,7 +20,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
        month = ( date.getFullYear() - now.getFullYear() ) * 12;
 
+       month -= date.getMonth();
+       month += now.getMonth();
+
+       month = month <= 0 ? 0 : month;
+
        console.log(month);
+       
        
 
         if (month > 12) {
@@ -47,5 +53,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     timeCount();
 
     setInterval( timeCount, 1000 );
+
+    // clock flip
 
 } );

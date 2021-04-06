@@ -1,0 +1,92 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.clock {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 15vw;
+    color: #fff;
+}
+
+.clock div::after {
+    display: block;
+    font-size: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#hours::after {
+    content: 'hours';
+}
+
+#minutes::after {
+    content: 'minutes';
+}
+
+#seconds::after {
+    content: 'seconds';
+}
+
+.clock .show {
+    transform-origin: 50% 0;
+    animation: show .5s ease-in-out forwards;
+}
+
+.clock .hide {
+    position: absolute;
+    transform-origin: 50% 0;
+    animation: hide .5s ease-in-out forwards;
+
+}
+
+#hours {
+    text-shadow: 
+        0 0 5px #f6ff00,
+        0 0 10px #f6ff00,
+        0 0 20px #f6ff00;
+}
+
+#minutes {
+    text-shadow: 
+        0 0 5px #78ff00,
+        0 0 10px #78ff00,
+        0 0 20px #78ff00;
+}
+
+#seconds {
+    text-shadow: 
+        0 0 5px #00ffd2,
+        0 0 10px #00ffd2,
+        0 0 20px #00ffd2;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    0% {
+        transform: scale(1, 1) translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0, 0) translateY(-200px);
+        opacity: 0;
+    }
+}

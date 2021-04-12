@@ -34,8 +34,6 @@ function changeHtml(id, value) {
     span.className = "show";
     span.innerText = value;
     contElem.appendChild(span);
-    // issue with removing dom object
-    //contElem.querySelector( ".hide" ).remove();
     contElem.querySelector( ".hide" ).addEventListener( 'animationend', () => {
         contElem.querySelector( ".hide" ).remove();
     } );

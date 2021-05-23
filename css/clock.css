@@ -31,10 +31,10 @@ body {
 #minutes::after {
     content: 'minutes';
 }
-
+/* 
 #seconds::after {
     content: 'seconds';
-}
+} */
 
 .clock .show {
     position: absolute;

@@ -10,6 +10,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
     const $minutes = document.querySelector( '.time-count-item-minutes .time-count-val' );
     const $seconds = document.querySelector( '.time-count-item-seconds .time-count-val' );
 
+      // clock circle
+      const dashArrayLength = 282.6;
+      const multValSec = 282.6 / 60;
+
+      let $circle = document.querySelector('.circle-animation-circle-seconds');
+      
+
     const timeCount = () => {
         let now = new Date();
         let timeleft = date - now;
@@ -41,6 +48,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
         let seconds = Math.floor(timeleft / 1000 ) % 60; // get seconds
 
+        $circle.style.strokeDashoffset = multValSec * seconds;
+
+
         $years.textContent = years;
         $month.textContent = month;
         $days.textContent = days;
@@ -54,6 +64,24 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
     setInterval( timeCount, 1000 );
 
-    // clock flip
+    function descendingOrder(n){
+        //...
+        let arrayN = n.toString().split('').map( element => parseInt( element, 10 ) );
+        arrayN.sort( ( a, b ) => {
+           return b - a;
+        } );
+        console.log( arrayN );
+        
+        const result = arrayN.join('');
+        return +result;
+      }
+
+      console.log( descendingOrder(2343242) );
+      
+
 
 } );
+
+let string = 'string';
+
+console.log(string.length);

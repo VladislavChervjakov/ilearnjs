@@ -539,8 +539,9 @@ body {
 
   .b-carousel__wrap {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     transition: transform .5s;
+    column-gap: 10px;
     will-change: transform;
     position: relative;
     z-index: 1;
@@ -548,7 +549,7 @@ body {
   }
 
     .b-carousel__item {
-      flex: 0 0 100%;
+      flex: 0 0 75%;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -561,6 +562,51 @@ body {
         object-fit: cover;
         display: block;
       }
+
+
+.slider {
+  margin-top: 200px; 
+}
+
+i {
+  color: #fff;
+  font-size: 3rem;
+  pointer-events: auto;
+  cursor: pointer; 
+}
+
+i:hover {
+  color: rgb(167, 11, 245);
+}
+
+.slider {
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  width: 80%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.slider-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  pointer-events: none;
+  transition: 0s ease-in;
+}
+
+.slide-img {
+  height: 100%;
+  background-color: black;
+  text-align: center;
+  padding: 3rem;
+}
 
 @keyframes fade_out_show{
   0% {

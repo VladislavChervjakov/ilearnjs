@@ -1,0 +1,34 @@
+.menu-block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+}
+
+.menu-item,
+.dropdown-item {
+    margin-right: 10px;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-item:last-child {
+    margin-right: 0;
+}
+
+.dropdown {
+    position: absolute;
+    top: 20px;
+    left: 2800px;
+    display: none;
+}
+
+.menu-item:hover > .dropdown {
+    display: flex;
+}

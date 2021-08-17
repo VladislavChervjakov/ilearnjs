@@ -33,7 +33,7 @@ body {
   display: flex;
   position: relative;
   top: 0;
-  left: -200px;
+  left: -133.33px;
   width: 10000px;
 }
 
@@ -42,7 +42,7 @@ body {
 }
 
 .slide {
-  width: 200px;
+  width: 133.33px;
   height: 300px;
   cursor: pointer;
   display: flex;

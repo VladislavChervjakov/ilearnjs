@@ -20,7 +20,8 @@ function slide ( wrapper, items, prev, next ) {
         lastClone = lastSlide.cloneNode( true ),
         index = 0,
         slidesToScroll = 1,
-        allowShift = true
+        allowShift = true,
+        infiniteLoop = false
 
         // cloning first and last element
         items.appendChild( firstClone );
@@ -105,18 +106,34 @@ function slide ( wrapper, items, prev, next ) {
 
         function checkIndex () {
             items.classList.remove('shifting');
+            allowShift = true;
 
             if ( index === -1 ) {
                 items.style.left = -( slidesLength * slideSize * slidesToScroll ) + 'px';
                 index = slidesLength - 1;
+                ///allowShift = false;
             }
 
-            if ( index === slidesLength ) {
-                items.style.left = - ( 1 * slideSize * slidesToScroll ) + 'px';
-                index = 0;
-            }
+            console.log(index);
+            console.log(slidesLength);
+            
+            
 
-            allowShift = true;
+            if( infiniteLoop ) {
+                if ( index === slidesLength) {
+                    items.style.left = - ( 1 * slideSize * slidesToScroll ) + 'px';
+                    index = 0;
+                }
+            } else {
+                if ( index === slidesLength - 3 ) {
+                    allowShift = false;
+                    // items.style.left = - ( 1 * slideSize * slidesToScroll ) + 'px';
+                    // index = 0;
+                    // allowShift = false;
+                }
+            }
+            
+
         }
 
 }
